@@ -9,6 +9,7 @@ This repository provides a Python implementation and walkthrough of gradient des
 3. [Conjugate Gradient Descent](#conjugate-gradient-descent)
 4. [Usage](#usage)
 5. [References](#references)
+6. [Results](#results)
 
 ## Introduction
 
@@ -26,7 +27,18 @@ where `learning_rate` is a positive scalar that determines the step size.
 
 ### Python Implementation
 
-_TODO: Add code snippet for gradient descent implementation_
+```
+def gd(x0, A, b, alpha, tol):
+    xs  = [x0]
+    x = x0
+    while True:
+        g = A @ x - b
+        x = x - alpha * g
+        if np.linalg.norm(x - xs[-1]) < tol:
+            break
+        xs.append(x)
+    return np.array(xs).squeeze()
+```
 
 ## Conjugate Gradient Descent
 
@@ -67,7 +79,23 @@ def cgd(x0, A, b):
 
 ## Usage
 
-_TODO: Add usage instructions, including any necessary installation steps, input/output formats, and example code_
+Execute all the algorithms running:
+
+```
+python main.py
+```
+
+## Results
+
+The following figures illustrate the trajectories of the optimization algorithms on a contour plot of a quadratic function. The red markers indicate the sequence of points visited by the algorithm as it converges to the minimum.
+
+### Gradient Descent Trajectory
+
+![Gradient Descent Trajectory](figures/sgd.png)
+
+### Conjugate Gradient Descent Trajectory
+
+![Conjugate Gradient Descent Trajectory](figures/cgd.png)
 
 ## References
 
